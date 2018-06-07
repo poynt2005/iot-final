@@ -93,6 +93,9 @@ module.exports.connect = function(io , address){
 
 									//假設可用容量小於15%，即不能壓縮，email通知清潔隊收取垃圾
 									if(freeCapacity <= 0.15){
+										//不能再壓縮ㄌ
+										isCompressAble = false;
+										
 										//寄信給清潔隊
 										emailNotifier("清潔隊信箱" , freeCapacity);
 
