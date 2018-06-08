@@ -5,12 +5,15 @@
 */
 'use strict';
 //網頁框架
-var app = require('express')();
+var express = require('express');
+var app = express();
 var http = require('http').Server(app);
 
 //"socket.io"物件必須附著在http物件下
 var io = require('socket.io')(http);
 
+//use static files directory in middleware
+app.use(express.static('static'));
 
 //送出html檔案
 app.get('/', function(req, res) {

@@ -19,8 +19,8 @@ module.exports.connect = function(io , options , address){
 	var totalCapacity = options.capacity;
 	var frequency = options.freq;
 
-	//紀錄容量是多少%
-	var freeCapacity = 0;
+	//紀錄容量是多少%(初始值 : 200%，代表sensor還未傳回資料)
+	var freeCapacity = 2;
 
 	//載入物聯網套件"johnny-five"
 	var five = require("johnny-five");
@@ -43,6 +43,9 @@ module.exports.connect = function(io , options , address){
 	  io.on('connection', function(socket){
 
 			console.log("socket has connected");
+
+			//先把已儲存好的容量送到前端
+			socket.emit("freeSpace" , {quantity : freeCapacity});
 
 			//compressing為真表示機器正在壓縮，偵測到距離有bang動時不要再呼叫壓縮器
 			var compressing = false;
@@ -80,6 +83,7 @@ module.exports.connect = function(io , options , address){
 
 				//紀錄該sensor測量與底部的距離
 				var distanceToTop = this.cm;
+
 				//計算可用容量
 				freeCapacity = capacity(distanceToTop , totalCapacity);
 
