@@ -110,7 +110,7 @@ module.exports.connect = function(io , options , address){
 							compressing = true;
 
 							//開始壓縮，bang等待完成
-							const state = await compress.startCompress(path.join("util" , "main.o"));
+							const state = await compress.startCompress(path.join("util" , "程式名稱"));
 
 							//完成壓縮
 							compressing = false;
