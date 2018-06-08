@@ -11,6 +11,7 @@
   "dependencies": {
     "express": "^4.16.3",
     "johnny-five": "^0.15.0",
+    "nodebots-hcsr04": "git+https://github.com/ajfisher/nodebots-hcsr04.git",
     "socket.io": "^2.1.1"
   }
 }

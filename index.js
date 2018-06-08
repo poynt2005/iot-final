@@ -19,7 +19,8 @@ app.get('/', function(req, res) {
 
 //連接arduino板子
 var boardConnect = require("./boardConnect.js");
-boardConnect.connect(io);
+
+boardConnect.connect(io , {totalCapacity: "垃圾桶容量(公分)" , frequency : "感應器更新頻率(毫秒)"});
 
 
 http.listen(3000, function() {
