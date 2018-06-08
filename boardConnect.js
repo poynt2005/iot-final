@@ -19,6 +19,9 @@ module.exports.connect = function(io , options , address){
 	var totalCapacity = options.capacity;
 	var frequency = options.freq;
 
+	//紀錄容量是多少%
+	var freeCapacity = 0;
+
 	//載入物聯網套件"johnny-five"
 	var five = require("johnny-five");
 
@@ -78,7 +81,7 @@ module.exports.connect = function(io , options , address){
 				//紀錄該sensor測量與底部的距離
 				var distanceToTop = this.cm;
 				//計算可用容量
-				var freeCapacity = capacity(distanceToTop , totalCapacity);
+				freeCapacity = capacity(distanceToTop , totalCapacity);
 
 				//送出"freeSpace"事件到前端(包含可用容量的資料)
 				socket.emit("freeSpace" , {quantity : freeCapacity});
@@ -90,7 +93,7 @@ module.exports.connect = function(io , options , address){
 
 			//取得sensor資訊
 				var distanceToTop = this.cm;
-				var freeCapacity = capacity(distanceToTop , totalCapacity);
+				freeCapacity = capacity(distanceToTop , totalCapacity);
 
 				//假設容量小於30%
 				if(freeCapacity <= 0.3){
@@ -103,7 +106,7 @@ module.exports.connect = function(io , options , address){
 							compressing = true;
 
 							//開始壓縮，bang等待完成
-							const state = await compress.startCompress(path.join("util" , "程式名稱"));
+							const state = await compress.startCompress(path.join("util" , "main.o"));
 
 							//完成壓縮
 							compressing = false;
@@ -147,12 +150,12 @@ module.exports.connect = function(io , options , address){
 
 	//計算可用容量
 	function capacity(distance , totalCapacity){
-	  return parseFloat((distance/totalCapacity).toFixed(2))
+	  return parseFloat((distance/totalCapacity).toFixed(2));
 	};
 
 	//寄信
-	function emailNotifier(reciver , freeCapacity){
+	function emailNotifier(reciver , freeCapacityToSend){
 	  var mailSender = require("./sendMail.js");
-	  mailSender.sendMail("發送者信箱" , "密碼" , freeCapacity , reciver);
+	  mailSender.sendMail("發送者信箱" , "密碼" , freeCapacityToSend , reciver);
 	};
 }

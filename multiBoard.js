@@ -22,7 +22,7 @@ module.exports.multiSocket = function(ip , port){
 		port : port
 	};
 
-	boardConnect.connect(io , {totalCapacity: "垃圾桶容量(公分)" , frequency : "感應器更新頻率(毫秒)"} , address);
+	boardConnect.connect(io , {totalCapacity: "垃圾桶容量(公分)" , freq : "感應器更新頻率(毫秒)"} , address);
 
 	app.listen(port , ip , function(){
 		console.log('ip : ' + ip + '正在監聽 port : ' + port);

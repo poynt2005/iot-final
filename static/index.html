@@ -58,7 +58,8 @@
         socket.on("freeSpace" , function(data){
           var message = "垃圾桶可用容量 : " + (data.quantity)*100 + "%";
           if((data.quantity) <= 0.3)
-            alert("目前可用容量少於30%，丟你媽B");
+            console.log(data.quantity);
+            //alert("目前可用容量少於30%，丟你媽B");
 
           //改變html中id為"capacity"的值
           $("#capacity").html(message);
