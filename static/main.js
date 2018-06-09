@@ -40,7 +40,7 @@ $(document).ready(function(){
   //接受來自後端的"freeSpace"，從data中freeCapacity讀取可用容量
   socket.on("freeSpace" , function(data){
 
-    var message = "垃圾桶可用容量 : " + (data.quantity)*100 + "%";
+    var message = "垃圾桶可用容量 : " + parseInt((data.quantity)*100) + "%";
 
     if(data.quantity === 2)
       message = "正在與Sensor連線，請稍後......";
@@ -62,7 +62,7 @@ $(document).ready(function(){
 
   //接受後端送出"capacityAlert"事件，表示垃圾桶快要滿了
   socket.on("capacityAlert" , function(data){
-    showdialog("請注意，目前容量 : " + (data.quantity)*100 + "%" + "，小於30%");
+    showdialog("請注意，目前容量 : " + parseInt((data.quantity)*100) + "%" + "，小於30%");
   });
 
 });
@@ -160,7 +160,7 @@ function canvasDraw(canvasId , freeCapacity){
 
   	ctx.font = "15px Arial";
     ctx.fillStyle = 'black';
-  	ctx.fillText(currentHeightRate*100 + "%", ovalArgs.centerX -15 , ovalArgs.centerY + ovalArgs.picHeightY/2);
+  	ctx.fillText(parseInt(currentHeightRate*100) + "%", ovalArgs.centerX -15 , ovalArgs.centerY + ovalArgs.picHeightY/2);
   }
   draw2(parseFloat(1 - freeCapacity).toFixed(2) , ovalArgs);
 }
@@ -172,6 +172,8 @@ function showdialog(alertStr){
 
 		$(function(){
 			$( "#dialog" ).dialog({
+
+        //position: { my: "center top", at: "right top"  },
 				show:{
 					effect: "puff",
 					duration: 100

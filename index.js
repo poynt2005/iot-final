@@ -24,7 +24,7 @@ app.get('/', function(req, res) {
 var boardConnect = require("./boardConnect.js");
 
 boardConnect.connect(io , {capacity: "垃圾桶容量(公分)" , freq : "感應器更新頻率(毫秒)"});
-//boardConnect.connect(io , {capacity: 30 , freq : 8000});
+//boardConnect.connect(io , {capacity: 75 , freq : 1000});
 
 http.listen(3000, function() {
     console.log('正在監聽 port 3000');
