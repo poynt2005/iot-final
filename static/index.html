@@ -8,6 +8,7 @@
 
     <!---- css file ---->
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="lib/jquery/jquery-ui.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -31,18 +32,24 @@
       <div class="info-wrapper">
         <div class="container">
           <div class="canvas-wrapper">
-            <canvas id="trashCan" width="150" height="150"></canvas>
+            <canvas id="trashCan" width="200" height="200"></canvas>
           </div>
           <div class="text-wrapper">
-            <span id="capacity">正在抓取資料中...</span>
+            <span id="capacity" style="font-size:30px;">正在抓取資料中...</span>
           </div>
         </div>
       </div>
     </div>
 
+    <div class="container">
+      <div id="dialog" title="警告">
+  			<p id = "alertMessage"></p>
+  		</div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script src="lib/jquery/jquery-3.2.1.min.js"></script>
+    <script src="lib/jquery/jquery-ui.min.js"></script>
     <script src="main.js"></script>
 
 

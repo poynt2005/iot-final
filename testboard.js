@@ -1,3 +1,10 @@
+/*
+ * A test from johnny-five website
+ * more deatil : http://johnny-five.io/examples/proximity-hcsr04/
+ */
+
+
+
 var five = require("johnny-five");
 var board = new five.Board();
 
@@ -14,5 +21,5 @@ board.on("ready", function() {
     console.log("-----------------");
   });
 
-  
+
 });

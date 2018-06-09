@@ -87,6 +87,12 @@ module.exports.connect = function(io , options , address){
 				//計算可用容量
 				freeCapacity = capacity(distanceToTop , totalCapacity);
 
+
+				if(freeCapacity >= 0.9){
+					//容量大表示清完垃圾桶，可以內部壓縮
+					isCompressAble = true;
+				}
+
 				//送出"freeSpace"事件到前端(包含可用容量的資料)
 				socket.emit("freeSpace" , {quantity : freeCapacity});
 			});
@@ -109,11 +115,16 @@ module.exports.connect = function(io , options , address){
 							var path = require("path");
 							compressing = true;
 
+							console.log("壓縮機正在啟動");
+
 							//開始壓縮，bang等待完成
 							const state = await compress.startCompress(path.join("util" , "程式名稱"));
+							//const state = await compress.startCompress(path.join("util" , "main.o"));
 
 							//完成壓縮
 							compressing = false;
+							console.log("壓縮機壓縮完成");
+
 
 							//測量壓縮後的容量
 							distanceToTop = this.cm;
